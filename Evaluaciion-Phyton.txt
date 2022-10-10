@@ -1,0 +1,64 @@
+saldo=[1000]
+retiro=[]
+cont=0
+from datetime import datetime
+
+while cont<3:
+    op = 1
+    nip = int(input("Favor de digitar los 4 digitos de su NIP: "))
+    if nip!=1235:
+        cont = cont + 1
+    while nip==1235 and op==1:
+        print("\t.:Bienvenida Brenda:.")
+        print("1.Consulta tu saldo")
+        print("2.Retirar saldo")
+        print("3.Hitorico de movimientos")
+        print("4.Salir\n")
+        opcion = int(input("Seleccione una opción:"))
+
+        if opcion==1:
+            print(f"Tu saldo actual es de: ${saldo[-1]}  MxN\n")
+            print("1. Regresar al menu")
+            print("2. Salir")
+            op = int(input("Seleccione una opción:"))
+
+        elif opcion==2:
+            actual = saldo[-1]
+            if actual!=0:
+                cantidad=int(input("Ingrese la cantidad que desea retirar: "))
+                canti =cantidad
+                if canti <= actual:
+                    retiro.append(canti)
+                    historico=actual-canti
+                    saldo.append(historico)
+                    #cajero.append(historico)
+                    print(f"¡Tu retiro de ${retiro[-1]} ha sido exitoso!\n Fecha de ejecución {datetime.now()}\n")
+                    print("1. Regresar al menu")
+                    print("2. Salir")
+                    op = int(input("Seleccione una opción:"))
+                else:
+                    print("Saldo insuficiente")
+                    print("1. Regresar al menu")
+                    print("2. Salir")
+                    op = int(input("Seleccione una opción:"))
+            else:
+                print("No cuentas con fondos suficientes")
+                print("1. Regresar al menu")
+                print("2. Salir")
+                op = int(input("Seleccione una opción:"))
+
+        elif opcion==3:
+            print("\t.Historico de movimientos:.")
+            for movimiento in saldo:
+                print(f"\tSaldo: {movimiento}")
+            for movimiento in retiro:
+                print(f"\tRetiros:{movimiento}\n")
+            print("1. Regresar al menu")
+            print("2. Salir")
+            op = int(input("Seleccione una opción:"))
+
+        elif opcion==4:
+            print("Has salido de tu sesión")
+            break
+
+print("\nIntenta más tarde")
